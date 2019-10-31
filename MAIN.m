@@ -1,18 +1,27 @@
 %%%%%%%%%%%%%%%%%%%%%%% MAIN %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Variables
-% x-y coordinates for origin and destination
+% x-y coordinates for and YAW origin and destination 
 Origin = [];
 Destination = [];
 
 
 %% Read Map 
 % Read and generate map
-% [XYZ_MAP, G_MAP, RES] = getMAP()
-%   - XYZ_MAP - XY Matrix storing Z coordinates for the map
-%   - G_MAP - Binary Matrix storing Z coordinates for the map
-%           - 1 traversable
-%           - 0 not traverable
-%   - RES - resolution between each cell
+pitchLim = 30;
+rollLim = 30;
+yardBright = imread('pls.png');
+yardBright = yardBright(:,:,1);
+[imHeight, imWidth] = size(yardBright);
+aspectRatio = imWidth/imHeight;
+height=0.4; % [m]
+yardWidth = 15; % [m]
+yardHeight=yardWidth/aspectRatio;
+RES = yardHeight/imHeight;
+
+yardElev = double(yardBright)/255*height;
+XYZ_MAP = imgaussfilt(yardElev,4);
+
+G_MAP = getTerrainBinary2(height, yardWidth, yardHeight, yardBright,pitchLim,rollLim);
 
 %% Generate Path
 % - select algorithm :
