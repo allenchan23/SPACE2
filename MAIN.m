@@ -1,4 +1,9 @@
 %%%%%%%%%%%%%%%%%%%%%%% MAIN %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Variables
+% x-y coordinates for origin and destination
+Origin = [];
+Destination = [];
+
 
 %% Read Map 
 % Read and generate map
