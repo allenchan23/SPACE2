@@ -1,8 +1,8 @@
 %%%%%%%%%%%%%%%%%%%%%%% MAIN %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Variables
 % x-y coordinates for and YAW origin and destination 
-Origin = [];
-Destination = [];
+Origin = [3,1];
+Destination = [4,10];
 
 
 %% Read Map 
@@ -20,7 +20,6 @@ RES = yardHeight/imHeight;
 
 yardElev = double(yardBright)/255*height;
 XYZ_MAP = imgaussfilt(yardElev,4);
-
 G_MAP = getTerrainBinary2(height, yardWidth, yardHeight, yardBright,pitchLim,rollLim);
 
 %% Generate Path
@@ -29,6 +28,7 @@ G_MAP = getTerrainBinary2(height, yardWidth, yardHeight, yardBright,pitchLim,rol
 %       - D* lite
 % waypoints = algorithm(XYZ_MAP,G_MAP,RES)
 % waypoints = [x,y] n * 2 x-y coordinates
+wayPoints = generatePath_ASTAR(XYZ_MAP,G_MAP,RES,Origin,Destination);
 
 %% Simulate
 % TBD

@@ -536,31 +536,31 @@ function path = aStarSearch(Map,Orig,Dest)
         global CELLH;
         x = [];
         y = [];
-        z = []
+        z = [];
         
-        % Traverse through each node
-        for i = 1:CELLL
-            for j = 1:CELLH        
-                currentNode = Map{j,i};
-                if currentNode.parent_i > 0 && currentNode.parent_j > 0
-                    % Obtain current node and cost
-                    parentNode = Map{currentNode.parent_j,currentNode.parent_i};
-                    x = [x,Map{j,i}.x];
-                    y = [y,Map{j,i}.y];
-                    c = [z,Map{j,i}.f];
-                    plot([currentNode.x,parentNode.x],[currentNode.y,parentNode.y],'-k')
-                end
-            end
-        end
-        
-        % Plot heat map of cost function costs at each explored node
-        sz = 20;
-        c = linspace(1,10,length(x));
-        scatter(x,y,sz,c,'filled')
-        plot(Orig.x,Orig.y,'ob','MarkerSize',20,'linewidth',3);
-        plot(Dest.x,Dest.y,'xr','MarkerSize',20,'linewidth',3);
-        drawnow;
-        pause(0.0001);
+%         % Traverse through each node
+%         for i = 1:CELLL
+%             for j = 1:CELLH        
+%                 currentNode = Map{j,i};
+%                 if currentNode.parent_i > 0 && currentNode.parent_j > 0
+%                     % Obtain current node and cost
+%                     parentNode = Map{currentNode.parent_j,currentNode.parent_i};
+%                     x = [x,Map{j,i}.x];
+%                     y = [y,Map{j,i}.y];
+%                     c = [z,Map{j,i}.f];
+%                     plot([currentNode.x,parentNode.x],[currentNode.y,parentNode.y],'-k')
+%                 end
+%             end
+%         end
+%         
+%         % Plot heat map of cost function costs at each explored node
+%         sz = 20;
+%         c = linspace(1,10,length(x));
+%         scatter(x,y,sz,c,'filled')
+%         plot(Orig.x,Orig.y,'ob','MarkerSize',20,'linewidth',3);
+%         plot(Dest.x,Dest.y,'xr','MarkerSize',20,'linewidth',3);
+%         drawnow;
+%         pause(0.0001);
     end 
     
     % return map
