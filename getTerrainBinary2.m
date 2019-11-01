@@ -15,7 +15,7 @@ vRounded = interp1(targets,targets,yardElev,'nearest');
 image = ones(imHeight,imWidth);
 figure(2)
 imshow(yardElev);
-grid=20;
+grid=2;
 tic
 for row = 2*grid:grid:imHeight-grid
     for col = 2*grid:grid:imWidth-grid

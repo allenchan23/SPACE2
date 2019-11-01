@@ -85,23 +85,23 @@ x = []
 y = []
 c = []
 
-% % Set Map values
-% for i = 1:CELLL
-%     for j = 1:CELLH        
-%        %Initialize Map
-%         currentNode = newMap{j,i};
-%         if currentNode.parent_i > 0 && currentNode.parent_j > 0
-%             parentNode = newMap{currentNode.parent_j,currentNode.parent_i};
-%             x = [x,newMap{j,i}.x];
-%             y = [y,newMap{j,i}.y];
-%             c = [z,newMap{j,i}.f];
-%             plot([currentNode.x,parentNode.x],[currentNode.y,parentNode.y],'-k')
-%         end
-%     end
-% end
-% sz = 20;
-% c = linspace(1,10,length(x));
-% scatter(x,y,sz,c,'filled')
-% plot(Orig.x,Orig.y,'ob','MarkerSize',20,'linewidth',3);
-% plot(Dest.x,Dest.y,'xr','MarkerSize',20,'linewidth',3);
+% Set Map values
+for i = 1:CELLL
+    for j = 1:CELLH        
+       %Initialize Map
+        currentNode = newMap{j,i};
+        if currentNode.parent_i > 0 && currentNode.parent_j > 0
+            parentNode = newMap{currentNode.parent_j,currentNode.parent_i};
+            x = [x,newMap{j,i}.x];
+            y = [y,newMap{j,i}.y];
+            c = [z,newMap{j,i}.f];
+            plot([currentNode.x,parentNode.x],[currentNode.y,parentNode.y],'-k')
+        end
+    end
+end
+sz = 20;
+c = linspace(1,10,length(x));
+scatter(x,y,sz,c,'filled')
+plot(Orig.x,Orig.y,'ob','MarkerSize',20,'linewidth',3);
+plot(Dest.x,Dest.y,'xr','MarkerSize',20,'linewidth',3);
 plot(path(:,2),30-path(:,1)+1,'r','linewidth',3);

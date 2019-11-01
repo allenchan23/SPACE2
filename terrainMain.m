@@ -8,7 +8,7 @@ yardBright = imread('pls.png');
 % of the iamge are actually useless (only top one has data)
 yardBright = yardBright(:,:,1);
 % read colour image cause why not
-yardCol = imread('marsYard.png');
+%yardCol = imread('marsYard.png');
 % grab size
 [imHeight, imWidth] = size(yardBright);
 % dimensions of the mars yard and height of maximum obstacle
