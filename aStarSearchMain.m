@@ -24,7 +24,7 @@ for i = 1:CELLL
     for j = 1:CELLH
         % Initialize Map
         z = rand();
-        Map{j,i} = makeNode(i,j,i,maxY-j+1,z,true,false,0,Inf,Inf);
+        Map{j,i} = makeNode_ASTAR(i,j,i,maxY-j+1,z,true,false,0,Inf,Inf);
     end
 end
 
