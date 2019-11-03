@@ -1,8 +1,14 @@
-%%%%%%%%%%%%%%%%%%%%%%% MAIN %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% Variables
+%% ---------------------------- MAIN -----------------------------------
+
+%% Variables and Inputs
 % x-y coordinates for and YAW origin and destination 
 Origin = [3,1];
 Destination = [4,10];
+
+% Path finding Strategy - [GLOBAL] || [LOCAL]
+% [GLOBAL] - Information provided of entire geographic location
+% [LOCAL] - Information discovered locally
+strat = 'GLOBAL';
 
 
 %% Read Map 
@@ -23,12 +29,16 @@ XYZ_MAP = imgaussfilt(yardElev,4);
 G_MAP = getTerrainBinary2(height, yardWidth, yardHeight, yardBright,pitchLim,rollLim);
 
 %% Generate Path
-% - select algorithm :
-%       - A*
-%       - D* lite
-% waypoints = algorithm(XYZ_MAP,G_MAP,RES)
-% waypoints = [x,y] n * 2 x-y coordinates
-wayPoints = generatePath_ASTAR(XYZ_MAP,G_MAP,RES,Origin,Destination);
+% Determine Path finding strategy
+if strcmp(strat,'GLOBAL')
+    % For Global seach, used A* Search
+    wayPoints = generatePath_ASTAR(XYZ_MAP,G_MAP,RES,Origin,Destination);
+elseif strcmp(strat,'LOCAL')
+    % For Local seach, used D* Lite Search
+    disp(1);
+else
+    return;
+end
 
 %% Simulate
 % TBD
