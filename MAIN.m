@@ -45,11 +45,6 @@ else
 end
 
 %% Simulate
-wayPoints = [
-    1,2
-    3,4
-    4,5
-];
 animateFlag=1;
 simulation(wayPoints, X, Y, XYZ_MAP, RES, animateFlag, yardWidth, yardHeight)
 
