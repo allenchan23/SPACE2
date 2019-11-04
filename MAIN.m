@@ -3,12 +3,12 @@
 %% Variables and Inputs
 % x-y coordinates for and YAW origin and destination 
 Origin = [3,1];
-Destination = [4,10];
+Destination = [3,2];
 
 % Path finding Strategy - [GLOBAL] || [LOCAL]
 % [GLOBAL] - Information provided of entire geographic location
 % [LOCAL] - Information discovered locally
-strat = 'GLOBAL';
+strat = 'LOCAL';
 
 
 %% Read Map 
@@ -35,7 +35,7 @@ if strcmp(strat,'GLOBAL')
     wayPoints = generatePath_ASTAR(XYZ_MAP,G_MAP,RES,Origin,Destination);
 elseif strcmp(strat,'LOCAL')
     % For Local seach, used D* Lite Search
-    disp(1);
+    wayPoints = generatePath_DSTAR(XYZ_MAP,G_MAP,RES,Origin,Destination);disp(1);
 else
     return;
 end
