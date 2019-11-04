@@ -8,7 +8,7 @@ Destination = [3,2];
 % Path finding Strategy - [GLOBAL] || [LOCAL]
 % [GLOBAL] - Information provided of entire geographic location
 % [LOCAL] - Information discovered locally
-strat = 'LOCAL';
+strat = 'GLOBAL c';
 
 
 %% Read Map 
