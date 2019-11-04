@@ -46,7 +46,7 @@ function wayPoints = generatePath_DSTAR(XYZ_MAP,G_MAP,RES,Orig,Dest)
     Orig_i = round(Orig(2)/RES);
     Orig_j = round((maxY-Orig(1))/RES);
     % Create Origin Node
-    MAP{Orig_j,Orig_i}
+    MAP{Orig_j,Orig_i};
     OrigNode = MAP{Orig_j,Orig_i};
 
     %% Set Destination

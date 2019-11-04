@@ -14,8 +14,8 @@ function ComputeShortestPath(Dest,Orig,k)
             break;
         end
         
-        j = vKey(3)
-        i = vKey(4)
+        j = vKey(3);
+        i = vKey(4);
         V = MAP{j,i};
         
         if (Orig_j == j) && (Orig_i == i)
@@ -127,7 +127,6 @@ function ComputeShortestPath(Dest,Orig,k)
                 thisNode = MAP{j+1,i-1};
                 updateVertex(thisNode,Orig,Dest,k);        
             end
-        end    
-        QUEUE      
+        end        
     end
 end
