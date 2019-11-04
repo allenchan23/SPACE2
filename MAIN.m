@@ -23,6 +23,10 @@ height=0.4; % [m]
 yardWidth = 15; % [m]
 yardHeight=yardWidth/aspectRatio;
 RES = yardHeight/imHeight;
+x = linspace(0,yardWidth, imWidth);
+y = linspace(0,yardHeight, imHeight);
+[X,Y] = meshgrid(x,y);
+
 
 yardElev = double(yardBright)/255*height;
 XYZ_MAP = imgaussfilt(yardElev,4);
@@ -41,7 +45,13 @@ else
 end
 
 %% Simulate
-% TBD
+wayPoints = [
+    1,2
+    3,4
+    4,5
+];
+animateFlag=1;
+simulation(wayPoints, X, Y, XYZ_MAP, RES, animateFlag, yardWidth, yardHeight)
 
 %% Animation
 % ""

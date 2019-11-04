@@ -1,4 +1,4 @@
-function simulation(wayPointsXY, X, Y, Z, gridSpacing, animateFlag)
+function simulation(wayPointsXY, X, Y, Z, gridSpacing, animateFlag, yardWidth, yardHeight)
 
 
 
@@ -67,6 +67,7 @@ function simulation(wayPointsXY, X, Y, Z, gridSpacing, animateFlag)
     %% SIM
     tic
     for ind = 1:length(wayPointsXY)-1
+        
         ind
         % grab desired heading
         headingCurrent = headings(ind);
@@ -109,14 +110,14 @@ function simulation(wayPointsXY, X, Y, Z, gridSpacing, animateFlag)
 
 
 
-
+    
     %% ANIMATION
     if animateFlag == 1
         figure(4)
         axis([-1 5 -1 5 -0.5 0.5])
         axis equal
         hold on
-        surf(X,Y,Z,'edgecolor','none')
+        surf(X, Y, Z, 'edgecolor', 'none')
         plot3(wayPointsXYZ(:,1), wayPointsXYZ(:,2), wayPointsXYZ(:,3), 'rx', 'Linewidth', 3)
         view(45,45)
         for simInd = 1:length(wayPointsXY)
