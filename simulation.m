@@ -68,43 +68,48 @@ function simulation(wayPointsXY, X, Y, Z, gridSpacing, animateFlag, yardWidth, y
     tic
     for ind = 1:length(wayPointsXY)-1
         
-        ind
+        
         % grab desired heading
         headingCurrent = headings(ind);
 
-        % run sim
-        a = sim('headingAlignment', [], options);
+        if headingCurrent ~= headingPrevious
+            % run sim
+            a = sim('headingAlignment', [], options);
 
-        % i did something weird with the negatives so thats why thats there
-        % (still works tho)
-        headingPrevious = -headingCurrent;
-        simlength = a.xPos.Time(end);
+            % i did something weird with the negatives so thats why thats there
+            % (still works tho)
+            headingPrevious = -headingCurrent;
+            simlength = a.xPos.Time(end)-a.xPos.Time(1);
 
-
-        % update 'new' end time of next sim
-        tStart=simlength
-        tEnd=tStart + 100
-        %store sim data
-        sims(ind)=a;
+            % update 'new' end time of next sim
+            tStart = tStart + simlength;
+            tEnd = tStart + 200;
+            %store sim data
+            sims(ind)=a;
+        else
+            
+        end
+        
+        
 
         % grab desired waypoint in XY
         XYCurrent = wayPointsXY(ind+1,:);
         %calculate path length from current waypoint to next waypoint
-        pathLength = sqrt((XYCurrent(1)-XYPrevious(1))^2 + (XYCurrent(2)-XYPrevious(2))^2);
+%         pathLength = sqrt((XYCurrent(1)-XYPrevious(1))^2 + (XYCurrent(2)-XYPrevious(2))^2);
 
 
+        
         % run sim moving backwrads and forwards to waypoints
         a = sim('positionAlignment', [], options);
-        simlength = a.xPos.Time(end);
-        ind
+        simlength = a.xPos.Time(end) - a.xPos.Time(1);
         %store
         simsPos(ind) = a;
         %update waypoint we just made it to as the previous one
         XYPrevious=XYCurrent;
 
         % update times
-        tStart = simlength;
-        tEnd = tStart + 100;
+        tStart = tStart + simlength;
+        tEnd = tStart + 200;
     end
     toc
 

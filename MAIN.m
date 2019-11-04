@@ -44,6 +44,9 @@ else
     return;
 end
 
+% make waypoints more concise
+wayPoints = duplicateRemover(wayPoints);
+
 %% Simulate
 animateFlag=1;
 simulation(wayPoints, X, Y, XYZ_MAP, RES, animateFlag, yardWidth, yardHeight)
