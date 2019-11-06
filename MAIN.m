@@ -1,14 +1,17 @@
 %% ---------------------------- MAIN -----------------------------------
-
+clear;clc;close all;
 %% Variables and Inputs
 % x-y coordinates for and YAW origin and destination 
 Origin = [3,1];
 Destination = [3,2];
+originHeading = deg2rad(0);
+destinationHeading = deg2rad(0);
+
 
 % Path finding Strategy - [GLOBAL] || [LOCAL]
 % [GLOBAL] - Information provided of entire geographic location
 % [LOCAL] - Information discovered locally
-strat = 'GLOBAL c';
+strat = 'GLOBAL';
 
 
 %% Read Map 
@@ -49,7 +52,7 @@ wayPoints = duplicateRemover(wayPoints);
 
 %% Simulate
 animateFlag=1;
-simulation(wayPoints, X, Y, XYZ_MAP, RES, animateFlag, yardWidth, yardHeight)
+simulation(wayPoints, X, Y, XYZ_MAP, RES, animateFlag, yardWidth, yardHeight, originHeading, destinationHeading)
 
 %% Animation
 % ""

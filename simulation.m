@@ -1,4 +1,4 @@
-function simulation(wayPointsXY, X, Y, Z, gridSpacing, animateFlag, yardWidth, yardHeight)
+function simulation(wayPointsXY, X, Y, Z, gridSpacing, animateFlag, yardWidth, yardHeight, originHeading, destinationHeading)
 
 
 
@@ -39,12 +39,11 @@ function simulation(wayPointsXY, X, Y, Z, gridSpacing, animateFlag, yardWidth, y
 
     % do geometry to get the headings for each path
     headings = getWaypointsHeadings(wayPointsXY);
-
-
+    headings = [headings; destinationHeading];
 
     %% INITIAL
     % set initial heading
-    headingPrevious = deg2rad(0);
+    headingPrevious = originHeading;
     % set initial waypoint/position
     XYPrevious = wayPointsXY(1,:);
     % set initial velocities
@@ -95,7 +94,7 @@ function simulation(wayPointsXY, X, Y, Z, gridSpacing, animateFlag, yardWidth, y
         % grab desired waypoint in XY
         XYCurrent = wayPointsXY(ind+1,:);
         %calculate path length from current waypoint to next waypoint
-%         pathLength = sqrt((XYCurrent(1)-XYPrevious(1))^2 + (XYCurrent(2)-XYPrevious(2))^2);
+        pathLength = sqrt((XYCurrent(1)-XYPrevious(1))^2 + (XYCurrent(2)-XYPrevious(2))^2);
 
 
         
