@@ -12,10 +12,11 @@ hold on
 targets = linspace(0,height,20);
 vRounded = interp1(targets,targets,yardElev,'nearest');
 [C,H] = contourf(yardElev,20);
+set(gca,'YDir','reverse')
 image = ones(imHeight,imWidth);
 figure(2)
 imshow(yardElev);
-grid=2;
+grid=10;
 tic
 for row = 2*grid:grid:imHeight-grid
     for col = 2*grid:grid:imWidth-grid

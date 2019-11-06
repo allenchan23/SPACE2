@@ -19,6 +19,7 @@ Y = (1:imHeight)/imHeight*yardHeight;
 X = (1:imWidth)/imWidth*yardWidth;
 [X,Y] = meshgrid(X,Y);
 surf(X,Y,yardElev)
+set(gca,'YDir','reverse')
 colorbar
 
 
@@ -31,7 +32,7 @@ image=ones(imHeight, imWidth);
 
 tic
 % variable grid size for the swath you wanna look at 
-sizer = 25;
+sizer = 10;
 % iterate through who image, moving up by "sizer" each time
 for row = 2*sizer:sizer:size(yardElev,1)-sizer
     for col = 2*sizer:sizer:size(yardElev,2)-sizer
