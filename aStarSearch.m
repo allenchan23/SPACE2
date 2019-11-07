@@ -386,7 +386,7 @@ function newMap = aStarSearch(Map,Orig,Dest)
                 % If the current node has not been visited yet or the
                 % cost is lower, append to open list
                 if (currentNode.f == Inf || currentNode.f > fNew)
-                    new = [fNew, j+1,i-1];
+                    new = [fNew, j-1,i-1];
                     openList = [new; openList];
                     Map{j-1,i-1}.f = fNew;
                     Map{j-1,i-1}.g = gNew;
@@ -397,15 +397,16 @@ function newMap = aStarSearch(Map,Orig,Dest)
             end
         end
         
-        % Get size of Grid
-        global CELLL;
-        global CELLH;
-        x = [];
-        y = [];
-        z = [];
-        
         % if live plot function enabled, plot
-        if LIVE_PLOT          
+        if LIVE_PLOT     
+            
+            % Get size of Grid
+            global CELLL;
+            global CELLH;
+            x = [];
+            y = [];
+            z = [];
+            
         % Traverse through each node
             for i = 1:CELLL
                 for j = 1:CELLH        
@@ -433,7 +434,7 @@ function newMap = aStarSearch(Map,Orig,Dest)
             % Draw now
             drawnow;
         end 
-       
+
     end 
     
     % return map
