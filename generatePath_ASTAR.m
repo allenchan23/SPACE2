@@ -26,6 +26,7 @@ function wayPoints = generatePath_ASTAR(XYZ_MAP,G_MAP,RES,Orig,Dest)
     % Initialize Map
     Map = {};
     
+    disp('Reading MAP....');
     % Set Map values
     for i = 1:CELLL
         for j = 1:CELLH
@@ -37,22 +38,43 @@ function wayPoints = generatePath_ASTAR(XYZ_MAP,G_MAP,RES,Orig,Dest)
         end
     end
 
+    disp('MAP read');
+    disp('Initializing A* Search Algorithm');
     %% Set Origin
     Orig_i = round(Orig(2)/RES);
     Orig_j = round((maxY-Orig(1))/RES);
+    
+    % Check if the destination is a valid coordiante
+    if isValid(Orig_j,Orig_i) == false
+        disp('Invalid Origin');
+        disp('TERMINATING');
+        wayPoints = [];
+        return
+    end
+    
     % Create Origin Node
     OrigNode = Map{Orig_j,Orig_i};
 
     %% Set Destination
     Dest_i = round(Dest(2)/RES);
     Dest_j = round((maxY-Dest(1))/RES);
+    
+    % Check if the origin is a valid coordiante
+    if isValid(Dest_j,Dest_i) == false
+        disp('Invalid Destination');
+        disp('TERMINATING');
+        wayPoints = [];
+        return
+    end
+    
     % Create Destination Node
     DestNode = Map{Dest_j,Dest_i};
 
-    
+    disp('Searching...');
     %% Begin Search
     % Obtain updated Map with path embedded
     newMap = aStarSearch(Map,OrigNode,DestNode);
     % Obtain set of waypoints from map
+    disp('Generating Waypoints')
     wayPoints = tracePath(newMap,OrigNode,DestNode);
 end

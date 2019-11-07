@@ -31,6 +31,7 @@ function wayPoints = generatePath_DSTAR(XYZ_MAP,G_MAP,RES,Orig,Dest)
     % Initialize Queue
     QUEUE = [];
     
+    disp('Reading MAP....');
     % Set Map values
     for i = 1:CELLL
         for j = 1:CELLH
@@ -42,9 +43,27 @@ function wayPoints = generatePath_DSTAR(XYZ_MAP,G_MAP,RES,Orig,Dest)
         end
     end
 
+    disp('MAP read');
+    disp('Initializing D* Lite Search Algorithm');
     %% Set Origin
     Orig_i = round(Orig(2)/RES);
     Orig_j = round((maxY-Orig(1))/RES);
+    
+    % Check if the destination is a valid coordiante
+    if isValid(Orig_j,Orig_i) == false
+        disp('Invalid Origin');
+        disp('TERMINATING');
+        wayPoints = [];
+        return
+    end
+ 
+    if ~OBSTACLES(Orig_j,Orig_i)
+        disp('Unsafe Origin');
+        disp('TERMINATING');
+        wayPoints = [];
+        return
+    end 
+    
     % Create Origin Node
     MAP{Orig_j,Orig_i};
     OrigNode = MAP{Orig_j,Orig_i};
@@ -52,6 +71,22 @@ function wayPoints = generatePath_DSTAR(XYZ_MAP,G_MAP,RES,Orig,Dest)
     %% Set Destination
     Dest_i = round(Dest(2)/RES);
     Dest_j = round((maxY-Dest(1))/RES);
+    
+    % Check if the origin is a valid coordiante
+    if isValid(Dest_j,Dest_i) == false
+        disp('Invalid Destination');
+        disp('TERMINATING');
+        wayPoints = [];
+        return
+    end
+    
+    if ~OBSTACLES(Dest_j,Dest_i)
+        disp('Unsafe Destination');
+        disp('TERMINATING');
+        wayPoints = [];
+        return
+    end 
+    
     % Create Destination Node
     MAP{Dest_j,Dest_i}.g = Inf;
     MAP{Dest_j,Dest_i}.rhs = 0;
@@ -62,7 +97,7 @@ function wayPoints = generatePath_DSTAR(XYZ_MAP,G_MAP,RES,Orig,Dest)
     firstEntry = [calculateKey(DestNode,OrigNode,k),Dest_j,Dest_i];
     queueInsert(firstEntry);
 
-    
+    disp('Seaching...')
     %% Begin Search
     wayPoints = DStarLiteSearch(DestNode,OrigNode,k);
 end

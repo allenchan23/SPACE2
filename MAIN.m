@@ -2,8 +2,8 @@
 clear;clc;close all;
 %% Variables and Inputs
 % x-y coordinates for and YAW origin and destination 
-Origin = [3,1];
-Destination = [3,2];
+Origin = [4,1];
+Destination = [1,13];
 originHeading = deg2rad(0);
 destinationHeading = deg2rad(0);
 
@@ -18,7 +18,7 @@ strat = 'GLOBAL';
 % Read and generate map
 pitchLim = 30;
 rollLim = 30;
-yardBright = imread('pls.png');
+yardBright = imread('plsLowest.JPG');
 yardBright = yardBright(:,:,1);
 [imHeight, imWidth] = size(yardBright);
 aspectRatio = imWidth/imHeight;
@@ -33,8 +33,8 @@ y = linspace(0,yardHeight, imHeight);
 
 yardElev = double(yardBright)/255*height;
 XYZ_MAP = imgaussfilt(yardElev,4);
-G_MAP = getTerrainBinary2(height, yardWidth, yardHeight, yardBright,pitchLim,rollLim);
-
+G_MAP = getTerrainBinary1(height, yardWidth, yardHeight, yardBright,pitchLim,rollLim);
+wayPoints = [];
 %% Generate Path
 % Determine Path finding strategy
 if strcmp(strat,'GLOBAL')
@@ -44,9 +44,17 @@ elseif strcmp(strat,'LOCAL')
     % For Local seach, used D* Lite Search
     wayPoints = generatePath_DSTAR(XYZ_MAP,G_MAP,RES,Origin,Destination);disp(1);
 else
+    disp('Invalid Operation');
+    return;
+end
+% If no waypoints generated, terminate
+if (isempty(wayPoints))
     return;
 end
 
+% Plot waypoints
+figure(10)
+plot(wayPoints(:,2),wayPoints(:,1),'-o');
 % make waypoints more concise
 wayPoints = duplicateRemover(wayPoints);
 

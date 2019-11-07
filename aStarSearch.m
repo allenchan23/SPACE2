@@ -29,8 +29,8 @@ function newMap = aStarSearch(Map,Orig,Dest)
     j = Orig.j;
     
     % Obtain the destination cell positions
-    iDest = Dest.i
-    jDest = Dest.j
+    iDest = Dest.i;
+    jDest = Dest.j;
     
     % Initialize the cost of the starting Node
     Map{j,i}.f = 0;
@@ -98,7 +98,7 @@ function newMap = aStarSearch(Map,Orig,Dest)
                 newMap = Map;
             
                 % Return found
-                disp('Path Found');
+                disp('Path Found!');
                 found = true; 
                 return; 
             
@@ -137,7 +137,7 @@ function newMap = aStarSearch(Map,Orig,Dest)
                 newMap = Map;
           
                 % Plot the point
-                disp('Path Found');
+                disp('Path Found!');
                 found = true; 
                 return; 
             
@@ -177,7 +177,7 @@ function newMap = aStarSearch(Map,Orig,Dest)
                 newMap = Map;
           
                 % Return found
-                disp('Path Found');
+                disp('Path Found!');
                 found = true; 
                 return; 
                 
@@ -216,7 +216,7 @@ function newMap = aStarSearch(Map,Orig,Dest)
                 newMap = Map;
  
                 % Return found
-                disp('Path Found');
+                disp('Path Found!');
                 found = true; 
                 return; 
                 
@@ -255,7 +255,7 @@ function newMap = aStarSearch(Map,Orig,Dest)
                 newMap = Map;
           
                 % Return found
-                disp('Path Found');
+                disp('Path Found!');
                 found = true; 
                 return; 
                 
@@ -294,7 +294,7 @@ function newMap = aStarSearch(Map,Orig,Dest)
                 newMap = Map;
          
                 % Return found
-                disp('Path Found');
+                disp('Path Found!');
                 found = true; 
                 return; 
                 
@@ -333,7 +333,7 @@ function newMap = aStarSearch(Map,Orig,Dest)
                 newMap = Map;
 
                 % Return found
-                disp('Path Found');  
+                disp('Path Found!');  
                 found = true; 
                 return; 
             
@@ -372,7 +372,7 @@ function newMap = aStarSearch(Map,Orig,Dest)
                 newMap = Map;
            
                 % Return Found
-                disp('Path Found');
+                disp('Path Found!');
                 found = true; 
                 return; 
                 
