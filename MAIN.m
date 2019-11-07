@@ -2,8 +2,8 @@
 clear;clc;close all;
 %% Variables and Inputs
 % x-y coordinates for and YAW origin and destination 
-Origin = [4,1];
-Destination = [1,13];
+Origin = [3,0.1];
+Destination = [2,10];
 originHeading = deg2rad(0);
 destinationHeading = deg2rad(0);
 
@@ -18,7 +18,7 @@ strat = 'GLOBAL';
 % Read and generate map
 pitchLim = 30;
 rollLim = 30;
-yardBright = imread('plsLowest.JPG');
+yardBright = imread('plsLower.PNG');
 yardBright = yardBright(:,:,1);
 [imHeight, imWidth] = size(yardBright);
 aspectRatio = imWidth/imHeight;
@@ -54,7 +54,15 @@ end
 
 % Plot waypoints
 figure(10)
-plot(wayPoints(:,2),wayPoints(:,1),'-o');
+axis equal;
+hold on;
+ter = imread('realTerrain.PNG');
+xlim([0 yardWidth])
+ylim([0 yardHeight])
+image([0 yardWidth],[yardHeight 0],ter);
+plot(wayPoints(:,2),wayPoints(:,1),'o');
+
+
 % make waypoints more concise
 wayPoints = duplicateRemover(wayPoints);
 
