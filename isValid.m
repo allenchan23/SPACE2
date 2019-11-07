@@ -1,9 +1,9 @@
 %% FUNCTION - Check if node index is within map
 % Given a set of matrix coordinates, determine if it is a valid position in
 % the given map
+% i - Map matrix i position
 % j - Map matrix j position
-% j - Map matrix j position
-% Return bool - T/F
+% Return bool - T - within map | F - outside Map
 
 % Author: Allen Chan
 

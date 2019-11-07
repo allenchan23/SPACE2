@@ -1,4 +1,4 @@
-%% FUNCTION - Generate Path for Rover
+%% FUNCTION - Generate Path for Rover using A* algorithm
 % Return set of waypoints for the path using A* seach algorithm
 % XYZ_MAP - grid map containing z coordinatge
 % G_MAP - goodness map of traverabilities 

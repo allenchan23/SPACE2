@@ -2,7 +2,7 @@
 % Given a node determine if we can traverse into that position, or if there
 % is an obstacle
 % V - Node
-% Return bool - T/F
+% Return bool - T - Traversable | F - Non-Traversable
 
 % Author: Allen Chan
 

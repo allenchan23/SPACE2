@@ -1,4 +1,4 @@
-%% FUNCTION - Calculate Heuristics
+%% FUNCTION - Begin A* Search
 % Function used to generate a new map containing shortest path
 % Map - cell grid containing nodes in each 
 % Orig - Origin Node

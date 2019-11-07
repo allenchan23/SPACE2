@@ -1,5 +1,13 @@
+%% FUNCTION - Check for next best position to explore in D * Lite
+% Obtain the lowest rhs value based on successive node
+% V - current node
+% Return rhs -  min rhs cost for given node
+
+% Author: Allen Chan
+
 function minRhs = minSuccessor(V)
     
+    % Obtain current information of the current node
     global MAP;
     i = V.i;
     j = V.j;
@@ -20,27 +28,40 @@ function minRhs = minSuccessor(V)
         % [S] - (j+1,i)         [SE] - (j+1,i+1)
         % [W] - (j,i-1)         [SW] - (j+1,i-1)
         
+        %% ------------------------- N ---------------------------------
         if isValid(j-1,i)
+            
+            % Obtain node, check if traversable, then obtain information
             thisNode = MAP{j-1,i};
             if thisNode.trav
                 thisx = thisNode.x;
                 thisy = thisNode.y;
+                
+                % Calculate rhs cost and update min
                 dist = sqrt((thisx-currentx)^2+(thisy-currenty)^2);
                 minRhs = min([minRhs,MAP{j-1,i}.g+dist]); 
             end
         end
         
-        if isValid(j+1,i)              
+        %% ------------------------- S ---------------------------------
+        if isValid(j+1,i)  
+            
+            % Obtain node, check if traversable, then obtain information
             thisNode = MAP{j+1,i};
             if thisNode.trav
                 thisx = thisNode.x;
                 thisy = thisNode.y;
+                
+                % Calculate rhs cost and update min
                 dist = sqrt((thisx-currentx)^2+(thisy-currenty)^2);
                 minRhs = min([minRhs,MAP{j+1,i}.g+dist]); 
             end           
         end
         
-        if isValid(j,i-1)              
+        %% ------------------------- W ---------------------------------
+        if isValid(j,i-1)    
+            
+            % Obtain node, check if traversable, then obtain information
             thisNode = MAP{j,i-1};
             if thisNode.trav
                 thisx = thisNode.x;
@@ -50,51 +71,74 @@ function minRhs = minSuccessor(V)
             end          
         end
         
-        if isValid(j,i+1)              
+        %% ------------------------- E ---------------------------------
+        if isValid(j,i+1)  
+            
+            % Obtain node, check if traversable, then obtain information
             thisNode = MAP{j,i+1};
             if thisNode.trav 
                 thisx = thisNode.x;
                 thisy = thisNode.y;
+                
+                % Calculate rhs cost and update min
                 dist = sqrt((thisx-currentx)^2+(thisy-currenty)^2);
                 minRhs = min([minRhs,MAP{j,i+1}.g+dist]); 
             end          
         end
         
-        if isValid(j+1,i+1)              
+         %% ------------------------- SE ---------------------------------
+        if isValid(j+1,i+1) 
+            
+            % Obtain node, check if traversable, then obtain information
             thisNode = MAP{j+1,i+1};
             if thisNode.trav 
                 thisx = thisNode.x;
                 thisy = thisNode.y;
+                
+                % Calculate rhs cost and update min
                 dist = sqrt((thisx-currentx)^2+(thisy-currenty)^2);
                 minRhs = min([minRhs,MAP{j+1,i+1}.g+dist]); 
             end          
         end
         
+        %% ------------------------- NE ---------------------------------
         if isValid(j-1,i+1)              
             thisNode = MAP{j-1,i+1};
             if thisNode.trav 
                 thisx = thisNode.x;
                 thisy = thisNode.y;
+                
+                % Calculate rhs cost and update min
                 dist = sqrt((thisx-currentx)^2+(thisy-currenty)^2);
                 minRhs = min([minRhs,MAP{j-1,i+1}.g+dist]); 
             end         
         end
         
-        if isValid(j-1,i-1)              
+        %% ------------------------- SW ---------------------------------
+        if isValid(j-1,i-1)  
+            
+            % Obtain node, check if traversable, then obtain information
             thisNode = MAP{j-1,i-1};
             if thisNode.trav
                 thisx = thisNode.x;
                 thisy = thisNode.y;
+                
+                % Calculate rhs cost and update min
                 dist = sqrt((thisx-currentx)^2+(thisy-currenty)^2);
                 minRhs = min([minRhs,MAP{j-1,i-1}.g+dist]); 
             end           
         end
         
-        if isValid(j+1,i-1)              
+        %% ------------------------- NW ---------------------------------
+        if isValid(j+1,i-1) 
+            
+            % Obtain node, check if traversable, then obtain information
             thisNode = MAP{j+1,i-1};
             if thisNode.trav
                 thisx = thisNode.x;
                 thisy = thisNode.y;
+                
+                % Calculate rhs cost and update min
                 dist = sqrt((thisx-currentx)^2+(thisy-currenty)^2);
                 minRhs = min([minRhs,MAP{j+1,i-1}.g+dist]); 
             end          

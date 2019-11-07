@@ -1,4 +1,18 @@
-%% Function for initializing nodes
+%% FUNCTION - For initializing nodes for D* Lite Algorithm
+% Given a set of inputs create a node data structure for the given cell
+% i - Cell i position
+% j - Cell j position
+% x - x coordinate
+% y - y coordinate
+% z - z coordinate
+% T - traverability (F - not traversable, T - traversable)
+% closed - on closed list for A star algorithm
+% g - cost from start to current node
+% rhs - rhs cost
+% Return: V - node data structure
+
+% Author: Allen Chan
+
 function V = makeNode_DSTAR(i,j,x,y,z,T,g,rhs)   
     V.i = i;               % matrix x position
     V.j = j;               % matrix y position
