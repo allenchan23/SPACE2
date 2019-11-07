@@ -70,6 +70,10 @@ function simulation(wayPointsXY, X, Y, Z, gridSpacing, animateFlag, yardWidth, y
         
         % grab desired heading
         headingCurrent = headings(ind);
+        
+        %set visualisation values - FELIX
+        XYZ_current_anim=[XYPrevious(1) 0 XYPrevious(2)];
+        Heading_current_anim=headingCurrent; 
 
         if headingCurrent ~= headingPrevious
             % run sim
@@ -96,6 +100,9 @@ function simulation(wayPointsXY, X, Y, Z, gridSpacing, animateFlag, yardWidth, y
         %calculate path length from current waypoint to next waypoint
         pathLength = sqrt((XYCurrent(1)-XYPrevious(1))^2 + (XYCurrent(2)-XYPrevious(2))^2);
 
+        %set visualisation values - FELIX
+        XYZ_current_anim=[XYPrevious(1) 0 XYPrevious(2)];
+        Heading_current_anim=headingCurrent; 
 
         
         % run sim moving backwrads and forwards to waypoints
@@ -109,6 +116,15 @@ function simulation(wayPointsXY, X, Y, Z, gridSpacing, animateFlag, yardWidth, y
         % update times
         tStart = tStart + simlength;
         tEnd = tStart + 200;
+        
+        % make sure that on next iteration vis starts from last spot
+%         myworld = vrworld('vrterrain_marsyardrover.wrl');
+%         myworld.Rover_Transform.translation = [XYCurrent(2) 0 XYCurrent(1)];
+%         myworld.Rover_Transform.rotation = [1 0 0 -pi/2];
+%         save(myworld, 'vrterrain_marsyardrover.wrl');
+%         %close(myworld);
+%         %delete(myworld);
+        
     end
     toc
 

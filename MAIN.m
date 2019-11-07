@@ -2,8 +2,8 @@
 clear;clc;close all;
 %% Variables and Inputs
 % x-y coordinates for and YAW origin and destination 
-Origin = [3,0.1];
-Destination = [2,10];
+Origin = [4.5,1];
+Destination = [4.5,4];
 originHeading = deg2rad(0);
 destinationHeading = deg2rad(0);
 
