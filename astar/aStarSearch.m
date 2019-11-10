@@ -1,24 +1,8 @@
-%% FUNCTION - Begin A* Search
-% Function used to generate a new map containing shortest path
-% Map - cell grid containing nodes in each 
-% Orig - Origin Node
-% Dest - Destination Node
-% Return: newMap - Map with parents entity updated so path is traceable
-
-% Author: Allen Chan
-
-function newMap = aStarSearch(Map,Orig,Dest)
+% FUNCNTION: A* seach algorithm
+function path = aStarSearch(Map,Orig,Dest)
     
     % TRUE - Live plot // FALSE - Live plot
     LIVE_PLOT = true;
-    figure(10)
-    figure('units','normalized','outerposition',[0 0 1 1]);
-    axis equal;
-    hold on;
-    ter = imread('realTerrain.PNG');
-    xlim([0 15])
-    ylim([0 5.84042553191489])
-    image([0 15],[5.84042553191489 0],ter);
     
     % Check if the destination is a valid coordiante
     if isValid(Dest.j,Dest.i) == false
@@ -37,8 +21,8 @@ function newMap = aStarSearch(Map,Orig,Dest)
     j = Orig.j;
     
     % Obtain the destination cell positions
-    iDest = Dest.i;
-    jDest = Dest.j;
+    iDest = Dest.i
+    jDest = Dest.j
     
     % Initialize the cost of the starting Node
     Map{j,i}.f = 0;
@@ -57,11 +41,8 @@ function newMap = aStarSearch(Map,Orig,Dest)
     % Variable to determine if the destination has been found
     found = false;
     
-    h = 0;
     % Iterate until path has been found or all nodes have been exhuasted
     while ~isempty(openList)
-        
-        h = h+1;
         
         % Find the node of minimum cost and erase from list
         [minval,index] = min(openList(:,1));
@@ -106,10 +87,19 @@ function newMap = aStarSearch(Map,Orig,Dest)
             if isDestination(currentNode.i,currentNode.j,iDest,jDest)
                 Map{j-1,i}.parent_i = i;
                 Map{j-1,i}.parent_j = j;
-                newMap = Map;
-            
+                path = Map;
+                
+                % Plot the point
+                if ~currentNode.visited && currentNode.f > fNew && LIVE_PLOT
+                    figure(1)
+                    plot([thisx,currentNode.x],[thisy,currentNode.y],'-k');
+                    plot(currentNode.x,currentNode.y,'ok')
+                    currentNode.visited = true;
+                    drawnow;
+                end
+                
                 % Return found
-                disp('Path Found!');
+                disp('Path Found');
                 found = true; 
                 return; 
             
@@ -119,7 +109,15 @@ function newMap = aStarSearch(Map,Orig,Dest)
                 gNew = Map{j,i}.g + dist;
                 hNew = calculateH(currentNode,Dest);
                 fNew = gNew + hNew;
-          
+                
+                % Plot the point
+                if ~currentNode.visited && LIVE_PLOT
+                    figure(1)
+                    plot(currentNode.x,currentNode.y,'ok')
+                    currentNode.visited = true;
+                    drawnow;
+                end
+                
                 % If the current node has not been visited yet or the
                 % cost is lower, append to open list
                 if (currentNode.f == Inf || currentNode.f > fNew)
@@ -145,10 +143,19 @@ function newMap = aStarSearch(Map,Orig,Dest)
             if isDestination(currentNode.i,currentNode.j,iDest,jDest)
                 Map{j+1,i}.parent_i = i;
                 Map{j+1,i}.parent_j = j;
-                newMap = Map;
-          
+                path = Map;
+                
+                % Otherwise calculate the cost of traversing to that point
+                if ~currentNode.visited && currentNode.f > fNew && LIVE_PLOT
+                    figure(1)
+                    plot([thisx,currentNode.x],[thisy,currentNode.y],'-k');
+                    plot(currentNode.x,currentNode.y,'ok')
+                    currentNode.visited = true;
+                    drawnow;
+                end
+                
                 % Plot the point
-                disp('Path Found!');
+                disp('Path Found');
                 found = true; 
                 return; 
             
@@ -158,7 +165,16 @@ function newMap = aStarSearch(Map,Orig,Dest)
                 gNew = Map{j,i}.g + dist;
                 hNew = calculateH(currentNode,Dest);
                 fNew = gNew + hNew;
-         
+                
+                % Plot the point
+                if ~currentNode.visited && LIVE_PLOT
+                    figure(1)
+                    plot([thisx,currentNode.x],[thisy,currentNode.y],'-k');
+                    plot(currentNode.x,currentNode.y,'ok')
+                    currentNode.visited = true;
+                    drawnow;
+                end
+                
                 % If the current node has not been visited yet or the
                 % cost is lower, append to open list
                 if (currentNode.f == Inf || currentNode.f > fNew)
@@ -185,10 +201,19 @@ function newMap = aStarSearch(Map,Orig,Dest)
             if isDestination(currentNode.i,currentNode.j,iDest,jDest)
                 Map{j,i+1}.parent_i = i;
                 Map{j,i+1}.parent_j = j;
-                newMap = Map;
-          
+                path = Map;
+                
+                % Plot the point
+                if ~currentNode.visited && currentNode.f > fNew && LIVE_PLOT
+                    figure(1)
+                    plot([thisx,currentNode.x],[thisy,currentNode.y],'-k');
+                    plot(currentNode.x,currentNode.y,'ok')
+                    currentNode.visited = true;
+                    drawnow;
+                end
+                
                 % Return found
-                disp('Path Found!');
+                disp('Path Found');
                 found = true; 
                 return; 
                 
@@ -198,7 +223,16 @@ function newMap = aStarSearch(Map,Orig,Dest)
                 gNew = Map{j,i}.g + dist;
                 hNew = calculateH(currentNode,Dest);
                 fNew = gNew + hNew;
-           
+                
+                % Plot the point
+                if ~currentNode.visited && LIVE_PLOT
+                    figure(1)
+                    plot([thisx,currentNode.x],[thisy,currentNode.y],'-k');
+                    plot(currentNode.x,currentNode.y,'ok')
+                    currentNode.visited = true;
+                    drawnow;
+                end
+                
                 % If the current node has not been visited yet or the
                 % cost is lower, append to open list
                 if (currentNode.f == Inf || currentNode.f > fNew)
@@ -224,10 +258,19 @@ function newMap = aStarSearch(Map,Orig,Dest)
             if isDestination(currentNode.i,currentNode.j,iDest,jDest)
                 Map{j,i-1}.parent_i = i;
                 Map{j,i-1}.parent_j = j;
-                newMap = Map;
- 
+                path = Map;
+                
+                % Plot the point
+                if ~currentNode.visited && currentNode.f > fNew && LIVE_PLOT
+                    figure(1)
+                    plot([thisx,currentNode.x],[thisy,currentNode.y],'-k');
+                    plot(currentNode.x,currentNode.y,'ok')
+                    currentNode.visited = true;
+                    drawnow;
+                end
+                
                 % Return found
-                disp('Path Found!');
+                disp('Path Found');
                 found = true; 
                 return; 
                 
@@ -237,7 +280,16 @@ function newMap = aStarSearch(Map,Orig,Dest)
                 gNew = Map{j,i}.g + dist;
                 hNew = calculateH(currentNode,Dest);
                 fNew = gNew + hNew;
-          
+                
+                % Plot the point
+                if ~currentNode.visited && currentNode.f > fNew && LIVE_PLOT
+                    figure(1)
+                    plot([thisx,currentNode.x],[thisy,currentNode.y],'-k');
+                    plot(currentNode.x,currentNode.y,'ok')
+                    currentNode.visited = true;
+                    drawnow;
+                end
+                
                 % If the current node has not been visited yet or the
                 % cost is lower, append to open list
                 if (currentNode.f == Inf || currentNode.f > fNew)
@@ -263,10 +315,19 @@ function newMap = aStarSearch(Map,Orig,Dest)
             if isDestination(currentNode.i,currentNode.j,iDest,jDest)
                 Map{j-1,i+1}.parent_i = i;
                 Map{j-1,i+1}.parent_j = j;
-                newMap = Map;
-          
+                path = Map;
+                 
+                % Check if the destination has been reached
+                if ~currentNode.visited && currentNode.f > fNew && LIVE_PLOT
+                    figure(1)
+                    plot([thisx,currentNode.x],[thisy,currentNode.y],'-k');
+                    plot(currentNode.x,currentNode.y,'ok')
+                    currentNode.visited = true;
+                    drawnow;
+                end
+                
                 % Return found
-                disp('Path Found!');
+                disp('Path Found');
                 found = true; 
                 return; 
                 
@@ -276,7 +337,16 @@ function newMap = aStarSearch(Map,Orig,Dest)
                 gNew = Map{j,i}.g + dist;
                 hNew = calculateH(currentNode,Dest);
                 fNew = gNew + hNew;
-            
+                
+                % Plot the point
+                if ~currentNode.visited && currentNode.f > fNew && LIVE_PLOT
+                    figure(1)
+                    plot([thisx,currentNode.x],[thisy,currentNode.y],'-k');
+                    plot(currentNode.x,currentNode.y,'ok')
+                    currentNode.visited = true;
+                    drawnow;
+                end
+                
                 % If the current node has not been visited yet or the
                 % cost is lower, append to open list
                 if (currentNode.f == Inf || currentNode.f > fNew)
@@ -302,10 +372,19 @@ function newMap = aStarSearch(Map,Orig,Dest)
             if isDestination(currentNode.i,currentNode.j,iDest,jDest)
                 Map{j+1,i+1}.parent_i = i;
                 Map{j+1,i+1}.parent_j = j;
-                newMap = Map;
-         
+                path = Map;
+                
+                % Plot the point
+                if ~currentNode.visited && currentNode.f > fNew && LIVE_PLOT
+                    figure(1)
+                    plot([thisx,currentNode.x],[thisy,currentNode.y],'-k');
+                    plot(currentNode.x,currentNode.y,'ok')
+                    currentNode.visited = true;
+                    drawnow;
+                end
+                
                 % Return found
-                disp('Path Found!');
+                disp('Path Found');
                 found = true; 
                 return; 
                 
@@ -315,7 +394,16 @@ function newMap = aStarSearch(Map,Orig,Dest)
                 gNew = Map{j,i}.g + dist;
                 hNew = calculateH(currentNode,Dest);
                 fNew = gNew + hNew;
-             
+                
+                % Plot the point
+                if ~currentNode.visited && currentNode.f > fNew && LIVE_PLOT
+                    figure(1)
+                    plot([thisx,currentNode.x],[thisy,currentNode.y],'-k');
+                    plot(currentNode.x,currentNode.y,'ok')
+                    currentNode.visited = true;
+                    drawnow;
+                end
+                
                 % If the current node has not been visited yet or the
                 % cost is lower, append to open list
                 if (currentNode.f == Inf || currentNode.f > fNew)
@@ -341,10 +429,19 @@ function newMap = aStarSearch(Map,Orig,Dest)
             if isDestination(currentNode.i,currentNode.j,iDest,jDest)
                 Map{j+1,i-1}.parent_i = i;
                 Map{j+1,i-1}.parent_j = j;
-                newMap = Map;
-
+                path = Map;
+                
+                % Plot the point
+                if ~currentNode.visited && currentNode.f > fNew && LIVE_PLOT
+                    figure(1)
+                    plot([thisx,currentNode.x],[thisy,currentNode.y],'-k');
+                    plot(currentNode.x,currentNode.y,'ok')
+                    currentNode.visited = true;
+                    drawnow;
+                end
+                
                 % Return found
-                disp('Path Found!');  
+                disp('Path Found');  
                 found = true; 
                 return; 
             
@@ -354,7 +451,16 @@ function newMap = aStarSearch(Map,Orig,Dest)
                 gNew = Map{j,i}.g + dist;
                 hNew = calculateH(currentNode,Dest);
                 fNew = gNew + hNew;
-           
+                
+                % Plot the point
+                if ~currentNode.visited && currentNode.f > fNew && LIVE_PLOT
+                    figure(1)
+                    plot([thisx,currentNode.x],[thisy,currentNode.y],'-k');
+                    plot(currentNode.x,currentNode.y,'ok')
+                    currentNode.visited = true;
+                    drawnow;
+                end
+                
                 % If the current node has not been visited yet or the
                 % cost is lower, append to open list
                 if (currentNode.f == Inf || currentNode.f > fNew)
@@ -380,10 +486,19 @@ function newMap = aStarSearch(Map,Orig,Dest)
             if isDestination(currentNode.i,currentNode.j,iDest,jDest)
                 Map{j-1,i-1}.parent_i = i;
                 Map{j-1,i-1}.parent_j = j;
-                newMap = Map;
-           
+                path = Map;
+                
+                % Plot the point
+                if ~currentNode.visited && currentNode.f > fNew && LIVE_PLOT
+                    figure(1)
+                    plot([thisx,currentNode.x],[thisy,currentNode.y],'-k');
+                    plot(currentNode.x,currentNode.y,'ok')
+                    currentNode.visited = true;
+                    drawnow;
+                end
+                
                 % Return Found
-                disp('Path Found!');
+                disp('Path Found');
                 found = true; 
                 return; 
                 
@@ -393,11 +508,20 @@ function newMap = aStarSearch(Map,Orig,Dest)
                 gNew = Map{j,i}.g + dist;
                 hNew = calculateH(currentNode,Dest);
                 fNew = gNew + hNew;
- 
+                
+                % Plot the point
+                if ~currentNode.visited && currentNode.f > fNew && LIVE_PLOT
+                    figure(1)
+                    plot([thisx,currentNode.x],[thisy,currentNode.y],'-k');
+                    plot(currentNode.x,currentNode.y,'ok')
+                    currentNode.visited = true;
+                    drawnow;
+                end
+                
                 % If the current node has not been visited yet or the
                 % cost is lower, append to open list
                 if (currentNode.f == Inf || currentNode.f > fNew)
-                    new = [fNew, j-1,i-1];
+                    new = [fNew, j+1,i-1];
                     openList = [new; openList];
                     Map{j-1,i-1}.f = fNew;
                     Map{j-1,i-1}.g = gNew;
@@ -408,47 +532,39 @@ function newMap = aStarSearch(Map,Orig,Dest)
             end
         end
         
-        % if live plot function enabled, plot
-        if LIVE_PLOT && ~mod(h,10)
-            
-            % Get size of Grid
-            global CELLL;
-            global CELLH;
-            x = [];
-            y = [];
-            z = [];
-            
+        global CELLL;
+        global CELLH;
+        x = [];
+        y = [];
+        z = []
+        
         % Traverse through each node
-            for i = 10:CELLL
-                for j = 10:CELLH        
-                    currentNode = Map{j,i};
-                    
-                    % If current node has been explored plot live
-                    if currentNode.parent_i > 0 && currentNode.parent_j > 0
-                        % Obtain current node and cost
-                        parentNode = Map{currentNode.parent_j,currentNode.parent_i};
-                        x = [x,Map{j,i}.x];
-                        y = [y,Map{j,i}.y];
-                        c = [z,Map{j,i}.f];
-                        plot([currentNode.x,parentNode.x],[currentNode.y,parentNode.y],'-k')
-                    end
+        for i = 1:CELLL
+            for j = 1:CELLH        
+                currentNode = Map{j,i};
+                if currentNode.parent_i > 0 && currentNode.parent_j > 0
+                    % Obtain current node and cost
+                    parentNode = Map{currentNode.parent_j,currentNode.parent_i};
+                    x = [x,Map{j,i}.x];
+                    y = [y,Map{j,i}.y];
+                    c = [z,Map{j,i}.f];
+                    plot([currentNode.x,parentNode.x],[currentNode.y,parentNode.y],'-k')
                 end
             end
-
-            % Plot heat map of cost function costs at each explored node
-            sz = 20;
-            c = linspace(1,10,length(x));
-            scatter(x,y,sz,c,'filled')
-            plot(Orig.x,Orig.y,'ob','MarkerSize',20,'linewidth',3);
-            plot(Dest.x,Dest.y,'xr','MarkerSize',20,'linewidth',3);
-            
-            % Draw now
-            drawnow;
-        end 
-
+        end
+        
+        % Plot heat map of cost function costs at each explored node
+        sz = 20;
+        c = linspace(1,10,length(x));
+        scatter(x,y,sz,c,'filled')
+        grid on;
+        grid minor;
+        plot(Orig.x,Orig.y,'ob','MarkerSize',15,'linewidth',3);
+        plot(Dest.x,Dest.y,'xr','MarkerSize',15,'linewidth',3);
+        drawnow;
+        pause(0.0001);
     end 
     
     % return map
-    disp('Destination Unreachable');
-    newMap = Map;
+    path = Map;
 end
